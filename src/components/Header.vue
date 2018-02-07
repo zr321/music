@@ -1,9 +1,9 @@
 <template>
   <div class="header">
     <div class="header-a">  
-        <router-link :to="{name:'recommend'}" :class="{'active':curTab == 0}"><span @click='changeTab(0)'>推荐</span></router-link>
-        <router-link :to="{name:'rank'}" :class="{'active':curTab == 1}"><span @click='changeTab(1)'>排行榜</span></router-link>
-        <router-link :to="{name:'search'}" :class="{'active':curTab == 2}"><span @click='changeTab(2)'>搜索</span></router-link>
+        <router-link :to="{name:'recommend'}" :class="{'active' :curTab == 0}"><span @click="changeTab(0)">推荐</span></router-link>
+		<router-link :to="{name:'rank'}" :class="{'active' :curTab == 1}"><span @click="changeTab(1)">排行榜</span></router-link>
+		<router-link :to="{name:'search'}" :class="{'active' :curTab == 2}"><span @click="changeTab(2)">搜索</span></router-link>
     </div>
   </div>
 </template>

@@ -5,10 +5,12 @@
       <div class="main">
           <swiper :options="swiperOption" class="mySwiper" rel="mySwiper">
             <swiper-slide data-swiper-autoplay="2000" 
-             v-for="slide in sliderData" :key="slide.alt">
-              
+             v-for="(slide,i) in sliderData" :key="slide.alt">
+              <div @click="imgClick(i)">
+                <a :href="i==0?cli1:i==1?cli2:i==2?cli3:i==3?cli4:cli5">
                 <img :src="slide.src" :alt="slide.alt">
-              
+                </a>
+              </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
@@ -46,11 +48,15 @@ export default {
   data(){
      return {
        radioImages:[
-         {src:'../../static/images/hot.png',alt:1,title:"热歌"},
-         {src:'../../static/images/sign.png',alt:2,title:"一人一首招牌歌"}
+         {src:'./static/images/hot.png',alt:1,title:"热歌"},
+         {src:'./static/images/sign.png',alt:2,title:"一人一首招牌歌"}
        ],
-
-       swiperOption: {  
+      cli1:'http://y.qq.com/m/act/sfhd/125.html?ADTAG=banner',
+      cli2:'https://c.y.qq.com/node/m/client/music_headline/index.html?_hidehd=1&_button=2&zid=545967',
+      cli3:'https://y.qq.com/w/album.html?albummid=004dxCIB3ZssZK',
+      cli4:'https://c.y.qq.com/node/m/client/music_headline/index.html?_hidehd=1&_button=2&zid=572977',
+      cli5:'https://c.y.qq.com/node/m/client/music_headline/index.html?_hidehd=1&_button=2&zid=575250',
+      swiperOption: {  
           pagination: {el: '.swiper-pagination',clickabel:true},
           loop: true,
           autoplay:true,
@@ -68,11 +74,11 @@ export default {
           // autoplayDisableOnInteraction : false
     },
         sliderData: [
-          {src:"../../static/images/1.png",alt:1,href:"www.baidu.com"},
-          {src:"../../static/images/2.png",alt:2,href:"www.baidu.com"},
-          {src:"../../static/images/3.png",alt:3,href:"www.baidu.com"},
-          {src:"../../static/images/4.png",alt:4,href:"www.baidu.com"},
-          {src:"../../static/images/5.png",alt:5,href:"www.baidu.com"}
+          {src:"./static/images/1.png",alt:1,href:"www.baidu.com"},
+          {src:"./static/images/2.png",alt:2,href:"www.baidu.com"},
+          {src:"./static/images/3.png",alt:3,href:"www.baidu.com"},
+          {src:"./static/images/4.png",alt:4,href:"www.baidu.com"},
+          {src:"./static/images/5.png",alt:5,href:"www.baidu.com"}
         ]
      }
   },
@@ -82,6 +88,14 @@ export default {
   mounted () {  
      
   },  
+  methods:{
+    // imgClick:function(i){
+    //   this.$router.push({
+    //     name:"RecommendSong",
+    //     params:{title:i}
+    //   })
+    // }
+  },
   components:{
     Header,
     swiper,
@@ -174,6 +188,7 @@ export default {
       font-size: 24/75rem;
       color:#626262;
       margin-top: 40/75rem;
+      margin-bottom: 20/75rem;
     }
   }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div class="rank">
       <Header></Header>
-      <div class="rank-top">
+      <!-- <scroller  ref="myscroller"> -->
+      <scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
+        <div class="rank-top">
           <template v-for="list in toList">
-            <router-link :to="{name:'ListDetail',params:{id:list.id}}">
+            <div @click="linkTo(list)">
               <div class="rank-content">
                 <div class="top-img-wrap">
                   <img :src="list.src" alt="">
@@ -11,7 +13,7 @@
                 </div>
                 <div class="content-rg">
                     <h3 class="content-title">{{list.title}}</h3>
-                    <p v-for="title in list.listTitle">
+                    <p v-for="title in list.listTitle" :key="title.id">
                       <span>{{title.id}}</span>
                        &nbsp; {{title.titleOne}} &nbsp; 
                       <span>{{title.titleTwo}}</span>
@@ -19,10 +21,13 @@
                     </p>
                 </div>
               </div>
-            </router-link>
+            </div>
           </template>
-      </div>
-      <more></more>
+        </div>
+        <more></more> 
+      </scroller>
+     
+  
   </div>
 </template>
 <script>
@@ -31,43 +36,44 @@ import more from '../components/more'
 export default {
   data(){
     return{
+      noData :'',
       toList:[
-        {id:1,src:'../../static/images/list-1.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
+        {id:1,src:'./static/images/list-1.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
           {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
           {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
           {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
           ]},
-        {id:2,src:'../../static/images/list-2.png',title:"巅峰榜·热歌",num:232413124,
+        {id:2,src:'./static/images/list-2.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
-          {titleOne:"等你下课(with 杨瑞代)",id:1,titleTwo:"- 周杰伦"},
-          {titleOne:"体面",id:2,titleTwo:"- 于文文"},
-          {titleOne:"说散就散",id:3,titleTwo:"- 袁娅维"},
+          {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
+          {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
+          {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
           ]},
-        {id:3,src:'../../static/images/list-2.png',title:"巅峰榜·热歌",num:232413124,
+        {id:3,src:'./static/images/list-1.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
-          {titleOne:"等你下课(with 杨瑞代)",id:1,titleTwo:"- 周杰伦"},
-          {titleOne:"体面",id:2,titleTwo:"- 于文文"},
-          {titleOne:"说散就散",id:3,titleTwo:"- 袁娅维"},
+          {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
+          {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
+          {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
           ]},
-        {id:4,src:'../../static/images/list-2.png',title:"巅峰榜·热歌",num:232413124,
+        {id:4,src:'./static/images/list-2.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
-          {titleOne:"等你下课(with 杨瑞代)",id:1,titleTwo:"- 周杰伦"},
-          {titleOne:"体面",id:2,titleTwo:"- 于文文"},
-          {titleOne:"说散就散",id:3,titleTwo:"- 袁娅维"},
+          {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
+          {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
+          {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
           ]},
-        {id:5,src:'../../static/images/list-2.png',title:"巅峰榜·热歌",num:232413124,
+        {id:5,src:'./static/images/list-1.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
-          {titleOne:"等你下课(with 杨瑞代)",id:1,titleTwo:"- 周杰伦"},
-          {titleOne:"体面",id:2,titleTwo:"- 于文文"},
-          {titleOne:"说散就散",id:3,titleTwo:"- 袁娅维"},
+          {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
+          {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
+          {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
           ]},
-        {id:6,src:'../../static/images/list-2.png',title:"巅峰榜·热歌",num:232413124,
+        {id:6,src:'./static/images/list-1.png',title:"安利XS·巅峰榜·流行指数",num:111121312,
         listTitle:[
-          {titleOne:"等你下课(with 杨瑞代)",id:1,titleTwo:"- 周杰伦"},
-          {titleOne:"体面",id:2,titleTwo:"- 于文文"},
-          {titleOne:"说散就散",id:3,titleTwo:"- 袁娅维"},
-          ]},
+          {titleOne:"PLANET",id:1,titleTwo:"- ラムジ (Lambsey)"},
+          {titleOne:"全世界失眠(Live)",id:2,titleTwo:"- 张韶涵"},
+          {titleOne:"我们之间",id:3,titleTwo:"- 冯提莫/孙子涵"},
+          ]}
       ]
     }
   },
@@ -78,6 +84,58 @@ export default {
       }
     }
   },
+  methods:{
+    linkTo:function(list){
+      this.$router.push({
+        name:'ListDetail',
+        params:{id:list.id}
+      })
+    },
+    infinite(done) {//往后刷新增加内容
+      if(this.noData) {
+        setTimeout(()=>{
+          this.$refs.myscroller.finishInfinite(2);
+        })
+        return;
+      }
+      let self = this;//this指向问题
+      let start = this.toList.length;
+      setTimeout(() => {
+        for(let i = start + 1; i < start + 3; i++) {
+        let m= {id:i,src:'./static/images/list-6.png',
+            title:"安利XS·巅峰榜·流行指数",num:111121312,
+            listTitle:[
+              {titleOne:"PLANET",id:i,titleTwo:"- ラムジ (Lambsey)"},
+              {titleOne:"全世界失眠(Live)",id:i+1,titleTwo:"- 张韶涵"},
+              {titleOne:"我们之间",id:i+2,titleTwo:"- 冯提莫/孙子涵"},
+            ]}
+          self.toList.push(m)
+        }
+        if(start > 8) {
+          self.noData = "没有更多数据"
+        }
+        self.$refs.myscroller.resize();
+          done()
+      }, 1500)
+    },
+    refresh (done) {//往前刷新增加内容
+        setTimeout(() => {
+          var start = this.toList.length - 1
+          for (var i = start; i > start - 3; i--) {
+            let l= {id:i,src:'./static/images/list-8.png',
+            title:"安利XS·巅峰榜·流行指数",num:111121312,
+            listTitle:[
+              {titleOne:"PLANET",id:i,titleTwo:"- ラムジ (Lambsey)"},
+              {titleOne:"全世界失眠(Live)",id:i+1,titleTwo:"- 张韶涵"},
+              {titleOne:"我们之间",id:i+2,titleTwo:"- 冯提莫/孙子涵"},
+            ]}
+            this.toList.splice(0, 0, l)
+          }
+          done()
+        }, 1500)
+    }
+
+  },
   components:{
     Header,more
   }
@@ -85,7 +143,8 @@ export default {
 </script>
 <style lang="less" rel="stylesheet/less">
   .rank-top{
-    padding:90/75rem 20/75rem 20/75rem 20/75rem;
+    padding:0 20/75rem 0 20/75rem;
+    margin-top: 110/75rem;
     .rank-content{
       width:100%;
       box-sizing: border-box;
@@ -133,7 +192,7 @@ export default {
         .arrow{
           position: absolute;
           top:50%;
-          right:65/75rem;
+          right:40/75rem;
         }
         .arrow:after, .arrow:before {
           border: 10/75rem solid transparent;
@@ -147,7 +206,7 @@ export default {
         }
 
         .arrow:before {
-          border-left-color: #7f7f7f;
+          border-left-color: #000;
           right: -21/75rem;
         }
       }

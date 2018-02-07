@@ -62,18 +62,19 @@ export default {
   methods:{
     inputFocus:function(){
       this.focusFlag=true;
-      this.inputWidth="85%";
       this.searchFlag=false;
+      this.inputWidth="85%";
     },
     inputQuXiao:function(){
       this.focusFlag=false;
+      this.searchFlag=true
       this.inputWidth="100%";
       this.keyword="";
-      this.searchFlag=true
     },
     emitKeyword: function (event) {
       this.keyword = event.target.innerText;
       localStorage.setItem("histroy",this.keyword);
+      if(this.keyword!==this.histotyFlag[0])
       this.histotyFlag.unshift(localStorage.getItem("histroy"));
       this.inputFocus();
     },
@@ -100,6 +101,9 @@ export default {
       box-sizing: border-box;
       position: relative;
       .search-btn{
+        position: absolute;
+        top:33%;
+        right:5%;
         display: inline-block;
         padding:0 15/75rem;
         font-size: 28/75rem;

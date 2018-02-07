@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import store from './vuex'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueScroller from 'vue-scroller'
 
 Vue.use(VueAwesomeSwiper)
+Vue.use(VueScroller)
 
 Vue.config.productionTip = false
 
@@ -17,5 +19,10 @@ new Vue({
   store,
   components: { App },
   template: '<App/>',
-  render:h=>h(App)
+  render:h=>h(App),
+  watch:{
+    $route(to,from){
+        console.log(to.path)
+    }
+  }
 }).$mount("#app")
